@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/clock"
-        android:name="com.zachvg.chessclock.Clock"
+        android:name="com.zachvg.chessclock.ClockFragment"
         android:label="fragment_clock"
         tools:layout="@layout/fragment_clock" />
 </navigation>
