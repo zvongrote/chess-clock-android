@@ -29,20 +29,43 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_buttonview"
+            android:id="@+id/button_player1"
             style="@style/clock_button"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{() -> viewModel.onPlayer1ButtonClick()}"
+            app:layout_constraintBottom_toTopOf="@+id/textview_player1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_pause" />
+            app:layout_constraintTop_toBottomOf="@+id/button_pause"
+            tools:text="Player 1" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_player2"
             style="@style/clock_button"
+            android:onClick="@{() -> viewModel.onPlayer2ButtonClick()}"
             android:rotation="180"
-            android:text="Button"
             app:layout_constraintBottom_toTopOf="@+id/button_pause"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="Player 2" />
+
+        <TextView
+            android:id="@+id/textview_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Player 1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:rotation="180"
+            android:text="Player 2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
