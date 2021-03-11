@@ -1,5 +1,7 @@
 package com.zachvg.chessclock
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 private enum class GameState {
@@ -15,8 +17,6 @@ private enum class Player {
 }
 
 class ClockViewModel : ViewModel() {
-
-    private var currentPlayer = Player.PLAYER_1
 
     fun onPlayer1ButtonClick() {
 

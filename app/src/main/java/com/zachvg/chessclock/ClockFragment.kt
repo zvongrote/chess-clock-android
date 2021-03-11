@@ -16,14 +16,13 @@ class ClockFragment : Fragment() {
     private val viewModel: ClockViewModel by viewModels()
     private lateinit var binding: FragmentClockBinding
 
-    private var state = 0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clock, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
