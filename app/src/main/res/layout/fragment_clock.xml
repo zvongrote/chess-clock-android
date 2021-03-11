@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zachvg.chessclock.ClockViewModel" />
+            type="com.zachvg.chessclock.clock.ClockViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player2_button" />
 
-        <com.zachvg.chessclock.ClockButton
+        <com.zachvg.chessclock.clock.ClockButton
             android:id="@+id/player1_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -60,7 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_pause" />
 
-        <com.zachvg.chessclock.ClockButton
+        <com.zachvg.chessclock.clock.ClockButton
             android:id="@+id/player2_button"
             android:layout_width="0dp"
             android:layout_height="0dp"

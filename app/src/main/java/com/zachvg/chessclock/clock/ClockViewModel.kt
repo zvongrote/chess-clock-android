@@ -1,4 +1,4 @@
-package com.zachvg.chessclock
+package com.zachvg.chessclock.clock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

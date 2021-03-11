@@ -1,11 +1,11 @@
-package com.zachvg.chessclock
+package com.zachvg.chessclock.clock
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
+import com.zachvg.chessclock.R
 import com.zachvg.chessclock.databinding.ClockButtonBinding
 
 class ClockButton @JvmOverloads constructor(

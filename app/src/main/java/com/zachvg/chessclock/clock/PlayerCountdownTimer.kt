@@ -1,4 +1,4 @@
-package com.zachvg.chessclock
+package com.zachvg.chessclock.clock
 
 import android.os.CountDownTimer
 
