@@ -18,54 +18,31 @@
 
         <ImageButton
             android:id="@+id/button_pause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="2"
-            android:scaleY="2"
-            android:src="@drawable/ic_pause"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:background="@drawable/ic_pause"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_player1"
-            style="@style/clock_button"
-            android:onClick="@{() -> viewModel.onPlayer1ButtonClick()}"
-            app:layout_constraintBottom_toTopOf="@+id/textview_player1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_pause"
-            tools:text="Player 1" />
-
-        <Button
-            android:id="@+id/button_player2"
-            style="@style/clock_button"
-            android:onClick="@{() -> viewModel.onPlayer2ButtonClick()}"
-            android:rotation="180"
-            app:layout_constraintBottom_toTopOf="@+id/button_pause"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            tools:text="Player 2" />
-
-        <TextView
-            android:id="@+id/textview_player1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Player 1"
+        <com.zachvg.chessclock.ClockButton
+            android:id="@+id/player1_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_pause" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+        <com.zachvg.chessclock.ClockButton
+            android:id="@+id/player2_button"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
             android:rotation="180"
-            android:text="Player 2"
+            app:layout_constraintBottom_toTopOf="@id/button_pause"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

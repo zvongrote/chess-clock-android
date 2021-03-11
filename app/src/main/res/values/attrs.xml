@@ -2,5 +2,12 @@
 <resources>
     <declare-styleable name="ChessClock">
         <attr name="colorClockBackground" format="color"/>
+        <attr name="colorActive" format="color"/>
+        <attr name="colorInactive" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ClockButton">
+        <attr name="time" format="string"/>
+        <attr name="moves" format="integer"/>
     </declare-styleable>
 </resources>

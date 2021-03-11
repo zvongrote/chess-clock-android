@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.zachvg.chessclock.databinding.FragmentClockBinding
@@ -14,6 +15,8 @@ class ClockFragment : Fragment() {
 
     private val viewModel: ClockViewModel by viewModels()
     private lateinit var binding: FragmentClockBinding
+
+    private var state = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,5 +31,6 @@ class ClockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
+
     }
 }
