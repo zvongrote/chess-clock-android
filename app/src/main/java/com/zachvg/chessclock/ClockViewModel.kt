@@ -19,10 +19,22 @@ private enum class Player {
 class ClockViewModel : ViewModel() {
 
     fun onPlayer1ButtonClick() {
-
+        // TODO
     }
 
     fun onPlayer2ButtonClick() {
+        // TODO
+    }
 
+    fun onSettingsButtonClick() {
+        // TODO
+    }
+
+    fun onPauseButtonClick() {
+        // TODO
+    }
+
+    fun onResetButtonClick() {
+        // TODO
     }
 }

@@ -17,14 +17,37 @@
         android:background="?attr/colorClockBackground">
 
         <ImageButton
+            android:id="@+id/button_settings"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginStart="@dimen/button_side_margin"
+            android:background="@drawable/ic_settings"
+            android:onClick="@{() -> viewModel.onSettingsButtonClick()}"
+            app:layout_constraintBottom_toTopOf="@+id/player1_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player2_button" />
+
+        <ImageButton
             android:id="@+id/button_pause"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="@drawable/ic_pause"
+            android:onClick="@{() -> viewModel.onPauseButtonClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button_reset"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginEnd="@dimen/button_side_margin"
+            android:background="@drawable/ic_refresh"
+            android:onClick="@{() -> viewModel.onResetButtonClick()}"
+            app:layout_constraintBottom_toTopOf="@+id/player1_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player2_button" />
 
         <com.zachvg.chessclock.ClockButton
             android:id="@+id/player1_button"
