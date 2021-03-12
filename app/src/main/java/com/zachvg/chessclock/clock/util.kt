@@ -8,22 +8,29 @@ When hours == 0, it's not shown.
 Minutes are shown even if 0 and should be padded with a leading zero if hours are shown
 Seconds should always be padded with a leading 0
  */
-fun millisToTimeString(millis: Long): String {
-    var localMillis = millis
+fun millisToTimeString(millis: Long?): String {
+    var result = "0:00"
 
-    val hours = TimeUnit.MILLISECONDS.toHours(localMillis)
-    localMillis -= TimeUnit.HOURS.toMillis(hours)
+    millis?.let {
+        var localMillis = millis
 
-    val minutes = TimeUnit.MILLISECONDS.toMinutes(localMillis)
-    localMillis -= TimeUnit.MINUTES.toMillis(minutes)
+        val hours = TimeUnit.MILLISECONDS.toHours(localMillis)
+        localMillis -= TimeUnit.HOURS.toMillis(hours)
 
-    val seconds = TimeUnit.MILLISECONDS.toSeconds(localMillis)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(localMillis)
+        localMillis -= TimeUnit.MINUTES.toMillis(minutes)
 
-    val hoursString = if (hours != 0L) "$hours:" else ""
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(localMillis)
 
-    val minutesString = if (hours == 0L) "$minutes" else "$minutes".padStart(2, '0')
+        val hoursString = if (hours != 0L) "$hours:" else ""
 
-    val secondsString = "$seconds".padStart(2, '0')
+        val minutesString = if (hours == 0L) "$minutes" else "$minutes".padStart(2, '0')
 
-    return "$hoursString$minutesString:$secondsString"
+        val secondsString = "$seconds".padStart(2, '0')
+
+        result = "$hoursString$minutesString:$secondsString"
+    }
+
+    return result
+
 }

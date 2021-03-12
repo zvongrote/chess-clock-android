@@ -30,6 +30,5 @@ class ClockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-
     }
 }
