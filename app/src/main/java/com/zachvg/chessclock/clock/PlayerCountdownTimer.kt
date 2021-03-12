@@ -56,7 +56,7 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
     private fun newCountDownTimer(millisInFuture: Long, countDownInterval: Long): CountDownTimer {
         return object : CountDownTimer(millisInFuture, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
-                timeLeftMillis = millisInFuture
+                timeLeftMillis = millisUntilFinished
                 this@PlayerCountDownTimer.onTick()
             }
 
