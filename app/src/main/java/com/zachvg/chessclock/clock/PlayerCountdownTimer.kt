@@ -17,7 +17,7 @@ import android.os.CountDownTimer
 // increase of 0.9 seconds in the total time.
 //
 // Using a shorter countdown interval helps the reduce the problem, but it's
-// possible that slower hardware may not be able to handle very short interval.
+// possible that slower hardware may not be able to handle very short intervals.
 // The default is set to 100ms right now.
 //
 // This could be an especially bad problem for the a chess match that has a
@@ -57,7 +57,7 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
         return object : CountDownTimer(millisInFuture, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftMillis = millisUntilFinished
-                this@PlayerCountDownTimer.onTick()
+                this@PlayerCountDownTimer.onTick(millisUntilFinished)
             }
 
             override fun onFinish() {
@@ -69,5 +69,5 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
 
     abstract fun onFinish()
 
-    abstract fun onTick()
+    abstract fun onTick(millisUntilFinished: Long)
 }
