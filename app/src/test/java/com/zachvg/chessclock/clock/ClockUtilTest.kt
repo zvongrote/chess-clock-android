@@ -57,7 +57,7 @@ class ClockUtilTest {
 
     @Test
     fun millisToTimeString_Input_0h1m4s() {
-        setMillisFromHoursMinutesSeconds(10, 0, 4)
+        setMillisFromHoursMinutesSeconds(0, 1, 4)
         assertThat(millisToTimeString(millis)).isEqualTo("1:04")
     }
 
@@ -200,7 +200,7 @@ class ClockUtilTest {
     @Test
     fun millisToTimeString_Input_0h0m3s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 3)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:03")
     }
 
     @Test
@@ -320,12 +320,12 @@ class ClockUtilTest {
     @Test
     fun millisToTimeString_Input_9h36m56s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(9, 36, 56)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("9:36:56")
     }
 
     @Test
     fun millisToTimeString_Input_13h0m4s_PlusRandomOffset() {
-        setMillisFromHourMinutesSecondsWithRandomOffset(12, 0, 4)
+        setMillisFromHourMinutesSecondsWithRandomOffset(13, 0, 4)
         assertThat(millisToTimeString(millis)).isEqualTo("13:00:04")
     }
 
