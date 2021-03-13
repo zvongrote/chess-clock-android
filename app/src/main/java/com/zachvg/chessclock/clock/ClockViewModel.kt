@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModel
 
 class ClockViewModel : ViewModel() {
 
-    private val _player1Time = MutableLiveData<Long>(0)
-    val player1Time: LiveData<String> = Transformations.map(_player1Time) { millis -> millisToTimeString(millis) }
+    private val clock = ChessClock(10_000L, 11_000L)
 
-    private val _player2Time = MutableLiveData<Long>(0)
-    val player2Time: LiveData<String> = Transformations.map(_player2Time) { millis -> millisToTimeString(millis) }
+    val player1Time: LiveData<String> =
+        Transformations.map(clock.player1TimeRemaining) { millis -> millisToTimeString(millis) }
+
+    val player2Time: LiveData<String> =
+        Transformations.map(clock.player2TimeRemaining) { millis -> millisToTimeString(millis) }
 
     fun onPlayer1ButtonClick() {
         // TODO

@@ -67,7 +67,7 @@ class ChessClock(
 
     private fun finishGame() {
         state = GameState.FINISHED
-        activePlayer
+        activePlayer = Player.NONE
     }
 
     enum class Player {
