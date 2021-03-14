@@ -28,7 +28,7 @@ class ClockViewModel : ViewModel() {
     }
 
     fun onPauseButtonClick() {
-        // TODO
+        clock.pause()
     }
 
     fun onResetButtonClick() {

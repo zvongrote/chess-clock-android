@@ -53,10 +53,17 @@ class ChessClock(
         activePlayer = Player.NONE
     }
 
+    fun pause() {
+        if (activePlayer == Player.PLAYER_1) player1Timer.pause()
+        if (activePlayer == Player.PLAYER_2) player2Timer.pause()
+
+        state = GameState.PAUSED
+    }
+
     fun onPlayerButtonClick(playerClicked: Player) {
         when (state) {
             GameState.NOT_STARTED -> startOppositeTimerFrom(playerClicked)
-            GameState.IN_PROGRESS -> toggle(playerClicked)
+            GameState.IN_PROGRESS -> if(playerClicked == activePlayer) toggle(playerClicked)
             GameState.PAUSED -> startOppositeTimerFrom(playerClicked)
             GameState.FINISHED -> {
             }
@@ -81,8 +88,14 @@ class ChessClock(
 
     private fun startOppositeTimerFrom(player: Player) {
         when (player) {
-            Player.PLAYER_1 -> player2Timer.start()
-            Player.PLAYER_2 -> player1Timer.start()
+            Player.PLAYER_1 -> {
+                player2Timer.start()
+                activePlayer = Player.PLAYER_2
+            }
+            Player.PLAYER_2 -> {
+                player1Timer.start()
+                activePlayer = Player.PLAYER_1
+            }
             Player.NONE -> Unit // Do nothing
         }
 
