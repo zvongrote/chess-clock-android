@@ -8,6 +8,8 @@ import androidx.databinding.BindingAdapter
 import com.zachvg.chessclock.R
 import com.zachvg.chessclock.databinding.ClockButtonBinding
 
+private const val BACKGROUND_COLOR_ACTIVE = 0
+
 class ClockButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
@@ -17,19 +19,54 @@ class ClockButton @JvmOverloads constructor(
 
     private val binding: ClockButtonBinding
 
+    var state: State = State.INACTIVE
+        set(value) {
+            field = value
+
+            when (value) {
+                State.ACTIVE -> setActiveColors()
+                State.INACTIVE -> setInactiveColors()
+                State.OUT_OF_TIME -> setOutOfTimeColors()
+            }
+        }
+
     var timeText: String
         get() = binding.timeText.text.toString()
-        set(value) { binding.timeText.text = value }
+        set(value) {
+            binding.timeText.text = value
+        }
 
     var movesText: String
         get() = binding.movesText.text.toString()
-        set(value) { binding.movesText.text = value }
+        set(value) {
+            binding.movesText.text = value
+        }
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         binding = ClockButtonBinding.inflate(inflater, this, true)
-        setBackgroundResource(R.drawable.clock_button_background)
+        setBackgroundResource(R.drawable.clock_button_background_inactive)
     }
+
+    private fun setOutOfTimeColors() {
+        TODO("Not yet implemented")
+    }
+
+    private fun setInactiveColors() {
+        TODO("Not yet implemented")
+    }
+
+    private fun setActiveColors() {
+
+    }
+
+    enum class State {
+        ACTIVE,
+        INACTIVE,
+        OUT_OF_TIME
+    }
+
+
 }
 
 @BindingAdapter("time_text")

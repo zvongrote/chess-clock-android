@@ -13,7 +13,9 @@ class ChessClock(
 
     // States
     var state: GameState = GameState.NOT_STARTED
+        private set
     var activePlayer: Player = Player.NONE
+        private set
 
     // Player timers
     private val player1Timer = object : PlayerCountDownTimer(player1TotalTime) {
