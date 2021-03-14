@@ -32,6 +32,6 @@ class ClockViewModel : ViewModel() {
     }
 
     fun onResetButtonClick() {
-        // TODO
+        clock.reset()
     }
 }

@@ -47,6 +47,7 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
      *  Resets the timer back to [totalTimeMillis].
      */
     fun reset() {
+        timer.cancel()
         timer = newCountDownTimer(totalTimeMillis, countDownInterval)
         _timeLeftMillis.value = totalTimeMillis
     }

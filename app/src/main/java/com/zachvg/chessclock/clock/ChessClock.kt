@@ -46,10 +46,11 @@ class ChessClock(
     }
 
     fun reset() {
+        player1Timer.reset()
+        player2Timer.reset()
+
         state = GameState.NOT_STARTED
         activePlayer = Player.NONE
-
-        // TODO reset player timers
     }
 
     fun onPlayerButtonClick(playerClicked: Player) {
