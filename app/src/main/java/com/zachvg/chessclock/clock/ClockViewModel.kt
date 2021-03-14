@@ -16,11 +16,11 @@ class ClockViewModel : ViewModel() {
         Transformations.map(clock.player2TimeRemaining) { millis -> millisToTimeString(millis) }
 
     fun onPlayer1ButtonClick() {
-        // TODO
+        clock.onPlayerButtonClick(ChessClock.Player.PLAYER_1)
     }
 
     fun onPlayer2ButtonClick() {
-        // TODO
+        clock.onPlayerButtonClick(ChessClock.Player.PLAYER_2)
     }
 
     fun onSettingsButtonClick() {
