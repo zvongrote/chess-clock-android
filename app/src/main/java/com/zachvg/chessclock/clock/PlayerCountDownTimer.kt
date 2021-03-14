@@ -31,26 +31,47 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
 
     private var timer = newCountDownTimer(millisInFuture, countDownInterval)
 
+    /**
+     * Starts the timer.
+     */
     fun start() {
         timer.start()
     }
 
-    fun restart() {
+    /**
+     *  Resets the timer back to [totalTimeMillis].
+     */
+    fun reset() {
         timer = newCountDownTimer(totalTimeMillis, countDownInterval)
+        timeLeftMillis = totalTimeMillis
     }
 
+    /**
+     * Pauses the timer with [timeLeftMillis] remaining.
+     */
     fun pause() {
         timer.cancel()
         timer = newCountDownTimer(timeLeftMillis, countDownInterval)
     }
 
+    /**
+     * Cancels the timer.
+     */
+    // Not sure if there's a use case for only cancelling the timer without also performing
+    // another action.
     fun cancel() {
         timer.cancel()
     }
 
+    /**
+     * Sets the timer to a new time
+     *
+     * @param newMillisInFuture New time to set in milliseconds
+     */
     fun setTime(newMillisInFuture: Long) {
         timer.cancel()
         timer = newCountDownTimer(newMillisInFuture, countDownInterval)
+        timeLeftMillis = newMillisInFuture
     }
 
     private fun newCountDownTimer(millisInFuture: Long, countDownInterval: Long): CountDownTimer {
