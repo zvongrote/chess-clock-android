@@ -1,6 +1,8 @@
 package com.zachvg.chessclock.clock
 
 import android.os.CountDownTimer
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 // Adds a rudimentary pause feature to the built in Android CountDownTimer
 
@@ -27,7 +29,10 @@ import android.os.CountDownTimer
 // https://stackoverflow.com/a/9802426/9633447
 abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownInterval: Long = 100L) {
     private var totalTimeMillis = millisInFuture
-    private var timeLeftMillis = millisInFuture
+
+    private val _timeLeftMillis = MutableLiveData(millisInFuture)
+    val timeLeftMillis: LiveData<Long>
+        get() = _timeLeftMillis
 
     private var timer = newCountDownTimer(millisInFuture, countDownInterval)
 
@@ -43,7 +48,7 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
      */
     fun reset() {
         timer = newCountDownTimer(totalTimeMillis, countDownInterval)
-        timeLeftMillis = totalTimeMillis
+        _timeLeftMillis.value = totalTimeMillis
     }
 
     /**
@@ -51,7 +56,7 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
      */
     fun pause() {
         timer.cancel()
-        timer = newCountDownTimer(timeLeftMillis, countDownInterval)
+        timer = newCountDownTimer(timeLeftMillis.value!!, countDownInterval)
     }
 
     /**
@@ -71,17 +76,18 @@ abstract class PlayerCountDownTimer(millisInFuture: Long, private var countDownI
     fun setTime(newMillisInFuture: Long) {
         timer.cancel()
         timer = newCountDownTimer(newMillisInFuture, countDownInterval)
-        timeLeftMillis = newMillisInFuture
+        _timeLeftMillis.value = newMillisInFuture
     }
 
     private fun newCountDownTimer(millisInFuture: Long, countDownInterval: Long): CountDownTimer {
         return object : CountDownTimer(millisInFuture, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
-                timeLeftMillis = millisUntilFinished
+                _timeLeftMillis.value = millisUntilFinished
                 this@PlayerCountDownTimer.onTick(millisUntilFinished)
             }
 
             override fun onFinish() {
+                _timeLeftMillis.value = 0L
                 this@PlayerCountDownTimer.onFinish()
             }
 

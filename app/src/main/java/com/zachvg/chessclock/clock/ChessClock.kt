@@ -2,6 +2,7 @@ package com.zachvg.chessclock.clock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 
 /*
 This class is responsible for handling the state of the
@@ -16,39 +17,24 @@ class ChessClock(
     var state: GameState = GameState.NOT_STARTED
     var activePlayer: Player = Player.NONE
 
-    // Time
-    private val _player1TimeRemaining = MutableLiveData<Long>(player1TotalTime)
-    val player1TimeRemaining: LiveData<Long>
-        get() = _player1TimeRemaining
-
-    private val _player2TimeRemaining = MutableLiveData<Long>(player2TotalTime)
-    val player2TimeRemaining: LiveData<Long>
-        get() = _player2TimeRemaining
-
     // Player timers
     private val player1Timer = object : PlayerCountDownTimer(player1TotalTime) {
-        override fun onFinish() {
-            _player1TimeRemaining.value = 0L
-            finishGame()
-        }
+        override fun onFinish() { finishGame() }
 
-        override fun onTick(millisUntilFinished: Long) {
-            _player1TimeRemaining.value = millisUntilFinished
-        }
+        override fun onTick(millisUntilFinished: Long) { }
 
     }
 
     private val player2Timer = object : PlayerCountDownTimer(player2TotalTime) {
-        override fun onFinish() {
-            _player2TimeRemaining.value = 0L
-            finishGame()
-        }
+        override fun onFinish() { finishGame() }
 
-        override fun onTick(millisUntilFinished: Long) {
-            _player2TimeRemaining.value = millisUntilFinished
-        }
+        override fun onTick(millisUntilFinished: Long) { }
 
     }
+
+    // Time
+    val player1TimeRemaining: LiveData<Long> = player1Timer.timeLeftMillis
+    val player2TimeRemaining: LiveData<Long> = player2Timer.timeLeftMillis
 
     fun newGame(player1Time: Long, player2Time: Long) {
         player1TotalTime = player1Time
@@ -61,8 +47,7 @@ class ChessClock(
         state = GameState.NOT_STARTED
         activePlayer = Player.NONE
 
-        _player1TimeRemaining.value = player1TotalTime
-        _player2TimeRemaining.value = player2TotalTime
+        // TODO reset player clocks
     }
 
     private fun finishGame() {
