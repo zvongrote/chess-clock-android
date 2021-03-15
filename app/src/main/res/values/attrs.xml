@@ -5,6 +5,7 @@
         <attr name="colorClockBackground" format="color" />
         <attr name="colorActive" format="color" />
         <attr name="colorInactive" format="color" />
+        <attr name="colorOutOfTime" format="color"/>
     </declare-styleable>
 
 </resources>

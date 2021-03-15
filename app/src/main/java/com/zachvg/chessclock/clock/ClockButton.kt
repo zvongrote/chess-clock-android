@@ -49,15 +49,15 @@ class ClockButton @JvmOverloads constructor(
     }
 
     private fun setOutOfTimeColors() {
-        TODO("Not yet implemented")
+        setBackgroundResource(R.drawable.clock_button_background_out_of_time)
     }
 
     private fun setInactiveColors() {
-        TODO("Not yet implemented")
+        setBackgroundResource(R.drawable.clock_button_background_inactive)
     }
 
     private fun setActiveColors() {
-
+        setBackgroundResource(R.drawable.clock_button_background_active)
     }
 
     enum class State {

@@ -30,5 +30,23 @@ class ClockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
+
+        viewModel.player1State.observe(viewLifecycleOwner) { playerState ->
+            when (playerState) {
+                ChessClock.PlayerState.INACTIVE -> binding.player1Button.state = ClockButton.State.INACTIVE
+                ChessClock.PlayerState.ACTIVE -> binding.player1Button.state = ClockButton.State.ACTIVE
+                ChessClock.PlayerState.OUT_OF_TIME -> binding.player1Button.state = ClockButton.State.OUT_OF_TIME
+                else -> Unit // Do nothing
+            }
+        }
+
+        viewModel.player2State.observe(viewLifecycleOwner) { playerState ->
+            when (playerState) {
+                ChessClock.PlayerState.INACTIVE -> binding.player2Button.state = ClockButton.State.INACTIVE
+                ChessClock.PlayerState.ACTIVE -> binding.player2Button.state = ClockButton.State.ACTIVE
+                ChessClock.PlayerState.OUT_OF_TIME -> binding.player2Button.state = ClockButton.State.OUT_OF_TIME
+                else -> Unit // Do nothing
+            }
+        }
     }
 }

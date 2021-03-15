@@ -15,6 +15,10 @@ class ClockViewModel : ViewModel() {
     val player2Time: LiveData<String> =
         Transformations.map(clock.player2TimeRemaining) { millis -> millisToTimeString(millis) }
 
+    val player1State = clock.player1State
+
+    val player2State = clock.player2State
+
     fun onPlayer1ButtonClick() {
         clock.onPlayerButtonClick(ChessClock.Player.PLAYER_1)
     }

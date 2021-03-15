@@ -15,5 +15,6 @@
         <item name="colorClockBackground">@color/dark_gray</item>
         <item name="colorActive">@color/night_orange</item>
         <item name="colorInactive">@color/night_gray</item>
+        <item name="colorOutOfTime">@color/night_out_of_time</item>
     </style>
 </resources>

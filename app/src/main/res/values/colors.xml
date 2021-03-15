@@ -10,4 +10,5 @@
     <color name="dark_gray">#202124</color>
     <color name="night_orange">#c36a2d</color>
     <color name="night_gray">#393e46</color>
+    <color name="night_out_of_time">#ca3e47</color>
 </resources>
