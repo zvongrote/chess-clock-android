@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.zachvg.chessclock.SingleLiveEvent
 
 class ClockViewModel : ViewModel() {
 
@@ -22,6 +23,8 @@ class ClockViewModel : ViewModel() {
 
     val player2State = clock.player2State
 
+    val showResetDialog = SingleLiveEvent<Boolean>()
+
     fun onPlayer1ButtonClick() {
         clock.onPlayerButtonClick(ChessClock.Player.PLAYER_1)
     }
@@ -39,6 +42,11 @@ class ClockViewModel : ViewModel() {
     }
 
     fun onResetButtonClick() {
+        clock.pause()
+        showResetDialog.value = true
+    }
+
+    fun resetClock() {
         clock.reset()
     }
 }

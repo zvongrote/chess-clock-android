@@ -1,5 +1,6 @@
 package com.zachvg.chessclock.clock
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,19 +34,34 @@ class ClockFragment : Fragment() {
 
         viewModel.player1State.observe(viewLifecycleOwner) { playerState ->
             when (playerState) {
-                ChessClock.PlayerState.INACTIVE -> binding.player1Button.state = ClockButton.State.INACTIVE
-                ChessClock.PlayerState.ACTIVE -> binding.player1Button.state = ClockButton.State.ACTIVE
-                ChessClock.PlayerState.OUT_OF_TIME -> binding.player1Button.state = ClockButton.State.OUT_OF_TIME
+                ChessClock.PlayerState.INACTIVE -> binding.player1Button.state =
+                    ClockButton.State.INACTIVE
+                ChessClock.PlayerState.ACTIVE -> binding.player1Button.state =
+                    ClockButton.State.ACTIVE
+                ChessClock.PlayerState.OUT_OF_TIME -> binding.player1Button.state =
+                    ClockButton.State.OUT_OF_TIME
                 else -> Unit // Do nothing
             }
         }
 
         viewModel.player2State.observe(viewLifecycleOwner) { playerState ->
             when (playerState) {
-                ChessClock.PlayerState.INACTIVE -> binding.player2Button.state = ClockButton.State.INACTIVE
-                ChessClock.PlayerState.ACTIVE -> binding.player2Button.state = ClockButton.State.ACTIVE
-                ChessClock.PlayerState.OUT_OF_TIME -> binding.player2Button.state = ClockButton.State.OUT_OF_TIME
+                ChessClock.PlayerState.INACTIVE -> binding.player2Button.state =
+                    ClockButton.State.INACTIVE
+                ChessClock.PlayerState.ACTIVE -> binding.player2Button.state =
+                    ClockButton.State.ACTIVE
+                ChessClock.PlayerState.OUT_OF_TIME -> binding.player2Button.state =
+                    ClockButton.State.OUT_OF_TIME
                 else -> Unit // Do nothing
+            }
+        }
+
+        viewModel.showResetDialog.observe(viewLifecycleOwner) { showResetDialog ->
+            if (showResetDialog) {
+                val positiveDialogListener =
+                    DialogInterface.OnClickListener { _, _ -> viewModel.resetClock() }
+
+                ResetDialog(positiveDialogListener).show(requireActivity().supportFragmentManager, "reset")
             }
         }
     }

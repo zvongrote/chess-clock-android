@@ -16,6 +16,7 @@ class ResetDialog(private val onPositiveClickListener: DialogInterface.OnClickLi
             val builder = AlertDialog.Builder(it).apply {
                 setMessage(R.string.reset_clock)
                 setPositiveButton(R.string.yes, onPositiveClickListener)
+                setNegativeButton(R.string.no, null)
             }
 
             builder.create()
