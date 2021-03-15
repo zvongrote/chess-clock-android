@@ -1,7 +1,7 @@
 package com.zachvg.chessclock.clock
 
+import android.view.View
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
@@ -14,6 +14,9 @@ class ClockViewModel : ViewModel() {
 
     val player2Time: LiveData<String> =
         Transformations.map(clock.player2TimeRemaining) { millis -> millisToTimeString(millis) }
+
+    val showPauseButton: LiveData<Int> =
+        Transformations.map(clock.gameState) { gameState -> if (gameState == ChessClock.GameState.IN_PROGRESS) View.VISIBLE else View.INVISIBLE }
 
     val player1State = clock.player1State
 

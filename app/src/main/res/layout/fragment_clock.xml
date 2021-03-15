@@ -14,6 +14,7 @@
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:background="?attr/colorClockBackground">
 
         <ImageButton
@@ -33,6 +34,7 @@
             android:layout_height="@dimen/icon_size"
             android:background="@drawable/ic_pause"
             android:onClick="@{() -> viewModel.onPauseButtonClick()}"
+            android:visibility="@{viewModel.showPauseButton}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:time_text="@{viewModel.player2Time}"/>
+            app:time_text="@{viewModel.player2Time}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

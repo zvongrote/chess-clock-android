@@ -13,8 +13,9 @@ class ChessClock(
 ) {
 
     // States
-    var state: GameState = GameState.NOT_STARTED
-        private set
+    private val _gameState = MutableLiveData(GameState.NOT_STARTED)
+    val gameState: LiveData<GameState>
+        get() = _gameState
 
     private val _player1State = MutableLiveData(PlayerState.INACTIVE)
     val player1State: LiveData<PlayerState>
@@ -58,24 +59,24 @@ class ChessClock(
         player1Timer.reset()
         player2Timer.reset()
 
-        state = GameState.NOT_STARTED
+        _gameState.value = GameState.NOT_STARTED
         _player1State.value = PlayerState.INACTIVE
         _player2State.value = PlayerState.INACTIVE
     }
 
     fun pause() {
-        if (state == GameState.IN_PROGRESS) {
+        if (gameState.value == GameState.IN_PROGRESS) {
             if (player1State.value == PlayerState.ACTIVE) player1Timer.pause()
             if (player2State.value == PlayerState.ACTIVE) player2Timer.pause()
 
-            state = GameState.PAUSED
+            _gameState.value = GameState.PAUSED
             _player1State.value = PlayerState.INACTIVE
             _player2State.value = PlayerState.INACTIVE
         }
     }
 
     fun onPlayerButtonClick(playerClicked: Player) {
-        when (state) {
+        when (gameState.value) {
             GameState.NOT_STARTED -> startOppositeTimerFrom(playerClicked)
             GameState.IN_PROGRESS -> {
                 if ((player1State.value == PlayerState.ACTIVE) and (playerClicked == Player.PLAYER_1)) {
@@ -124,11 +125,11 @@ class ChessClock(
             Player.NONE -> Unit // Do nothing
         }
 
-        state = GameState.IN_PROGRESS
+        _gameState.value = GameState.IN_PROGRESS
     }
 
     private fun onOutOfTime(player: Player) {
-        state = GameState.FINISHED
+        _gameState.value = GameState.FINISHED
 
         if (player == Player.PLAYER_1) _player1State.value = PlayerState.OUT_OF_TIME
         if (player == Player.PLAYER_2) _player2State.value = PlayerState.OUT_OF_TIME
