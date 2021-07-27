@@ -1,4 +1,4 @@
-package com.zachvg.chessclock.gameoptions
+package com.zachvg.chessclock.ui.gameoptions
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

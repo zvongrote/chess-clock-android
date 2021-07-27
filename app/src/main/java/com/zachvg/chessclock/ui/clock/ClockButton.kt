@@ -1,4 +1,4 @@
-package com.zachvg.chessclock.clock
+package com.zachvg.chessclock.ui.clock
 
 import android.content.Context
 import android.util.AttributeSet

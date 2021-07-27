@@ -1,4 +1,4 @@
-package com.zachvg.chessclock.clock
+package com.zachvg.chessclock.ui.clock
 
 import android.app.AlertDialog
 import android.app.Dialog

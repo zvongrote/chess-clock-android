@@ -1,4 +1,4 @@
-package com.zachvg.chessclock.clock
+package com.zachvg.chessclock.ui.clock
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.zachvg.chessclock.R
+import com.zachvg.chessclock.clock.ChessClock
 import com.zachvg.chessclock.databinding.FragmentClockBinding
 
 

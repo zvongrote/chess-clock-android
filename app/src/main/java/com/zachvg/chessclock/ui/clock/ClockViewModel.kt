@@ -1,10 +1,12 @@
-package com.zachvg.chessclock.clock
+package com.zachvg.chessclock.ui.clock
 
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.zachvg.chessclock.SingleLiveEvent
+import com.zachvg.chessclock.clock.ChessClock
+import com.zachvg.chessclock.millisToTimeString
 
 class ClockViewModel : ViewModel() {
 

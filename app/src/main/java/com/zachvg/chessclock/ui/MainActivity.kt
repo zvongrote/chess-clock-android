@@ -1,4 +1,4 @@
-package com.zachvg.chessclock
+package com.zachvg.chessclock.ui
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import androidx.core.view.WindowCompat
+import com.zachvg.chessclock.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

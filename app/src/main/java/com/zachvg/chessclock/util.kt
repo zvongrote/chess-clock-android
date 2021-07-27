@@ -1,4 +1,4 @@
-package com.zachvg.chessclock.clock
+package com.zachvg.chessclock
 
 import java.util.concurrent.TimeUnit
 
