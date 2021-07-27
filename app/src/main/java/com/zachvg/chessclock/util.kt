@@ -12,7 +12,21 @@ fun millisToTimeString(millis: Long?): String {
     var result = "0:00"
 
     millis?.let {
-        var localMillis = millis
+        /*
+        To make sure the correct time is displayed, the number of milliseconds has to be rounded
+        up the the closest second before performing the logic to build the string.
+
+        For example:
+        10,001 ms should display as 11 seconds
+        10,000 ms should display as 10 seconds
+
+        To round up, add 999 ms, divide by 1,000, then multiply by 1,000
+
+        For example:
+        10,001 + 999 = 11,000 -> 11,000 / 1,000 = 11 -> 11 * 1,000 = 11,000
+        12,364 + 999 = 13,363 -> 13,363 / 1,000 = 13 -> 13 * 1,000 = 13,000
+         */
+        var localMillis = ((millis + 999) / 1_000) * 1_000
 
         val hours = TimeUnit.MILLISECONDS.toHours(localMillis)
         localMillis -= TimeUnit.HOURS.toMillis(hours)

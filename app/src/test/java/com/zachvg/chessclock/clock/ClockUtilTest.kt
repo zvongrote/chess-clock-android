@@ -195,168 +195,168 @@ class ClockUtilTest {
     @Test
     fun millisToTimeString_Input_0h0m0s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 0)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:01")
     }
 
     @Test
     fun millisToTimeString_Input_0h0m3s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 3)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:03")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:04")
     }
 
     @Test
     fun millisToTimeString_Input_0h0m8s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 8)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:08")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:09")
     }
 
     @Test
     fun millisToTimeString_Input_0h0m12s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 12)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:12")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:13")
     }
 
     @Test
     fun millisToTimeString_Input_0h0m19s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 19)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:19")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:20")
     }
 
     @Test
     fun millisToTimeString_Input_0h0m43s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 0, 43)
-        assertThat(millisToTimeString(millis)).isEqualTo("0:43")
+        assertThat(millisToTimeString(millis)).isEqualTo("0:44")
     }
 
     @Test
     fun millisToTimeString_Input_0h1m0s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 1, 0)
-        assertThat(millisToTimeString(millis)).isEqualTo("1:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("1:01")
     }
 
     @Test
     fun millisToTimeString_Input_0h2m5s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 2, 5)
-        assertThat(millisToTimeString(millis)).isEqualTo("2:05")
+        assertThat(millisToTimeString(millis)).isEqualTo("2:06")
     }
 
     @Test
     fun millisToTimeString_Input_0h4m36s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 4, 36)
-        assertThat(millisToTimeString(millis)).isEqualTo("4:36")
+        assertThat(millisToTimeString(millis)).isEqualTo("4:37")
     }
 
     @Test
     fun millisToTimeString_Input_0h8m52s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 8, 52)
-        assertThat(millisToTimeString(millis)).isEqualTo("8:52")
+        assertThat(millisToTimeString(millis)).isEqualTo("8:53")
     }
 
     @Test
     fun millisToTimeString_Input_0h10m2s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 10, 2)
-        assertThat(millisToTimeString(millis)).isEqualTo("10:02")
+        assertThat(millisToTimeString(millis)).isEqualTo("10:03")
     }
 
     @Test
     fun millisToTimeString_Input_0h11m6s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 11, 6)
-        assertThat(millisToTimeString(millis)).isEqualTo("11:06")
+        assertThat(millisToTimeString(millis)).isEqualTo("11:07")
     }
 
     @Test
     fun millisToTimeString_Input_0h14m20s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 14, 20)
-        assertThat(millisToTimeString(millis)).isEqualTo("14:20")
+        assertThat(millisToTimeString(millis)).isEqualTo("14:21")
     }
 
     @Test
     fun millisToTimeString_Input_0h32m47s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(0, 32, 47)
-        assertThat(millisToTimeString(millis)).isEqualTo("32:47")
+        assertThat(millisToTimeString(millis)).isEqualTo("32:48")
     }
 
     @Test
     fun millisToTimeString_Input_2h0m4s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(2, 0, 4)
-        assertThat(millisToTimeString(millis)).isEqualTo("2:00:04")
+        assertThat(millisToTimeString(millis)).isEqualTo("2:00:05")
     }
 
     @Test
     fun millisToTimeString_Input_5h0m39s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(5, 0, 39)
-        assertThat(millisToTimeString(millis)).isEqualTo("5:00:39")
+        assertThat(millisToTimeString(millis)).isEqualTo("5:00:40")
     }
 
     @Test
     fun millisToTimeString_Input_6h0m0s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(6, 0, 0)
-        assertThat(millisToTimeString(millis)).isEqualTo("6:00:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("6:00:01")
     }
 
     @Test
     fun millisToTimeString_Input_7h1m0s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(7, 1, 0)
-        assertThat(millisToTimeString(millis)).isEqualTo("7:01:00")
+        assertThat(millisToTimeString(millis)).isEqualTo("7:01:01")
     }
 
     @Test
     fun millisToTimeString_Input_8h4m5s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(8, 4, 5)
-        assertThat(millisToTimeString(millis)).isEqualTo("8:04:05")
+        assertThat(millisToTimeString(millis)).isEqualTo("8:04:06")
     }
 
     @Test
     fun millisToTimeString_Input_8h6m41s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(8, 6, 41)
-        assertThat(millisToTimeString(millis)).isEqualTo("8:06:41")
+        assertThat(millisToTimeString(millis)).isEqualTo("8:06:42")
     }
 
     @Test
     fun millisToTimeString_Input_9h15m3s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(9, 15, 3)
-        assertThat(millisToTimeString(millis)).isEqualTo("9:15:03")
+        assertThat(millisToTimeString(millis)).isEqualTo("9:15:04")
     }
 
     @Test
     fun millisToTimeString_Input_9h36m56s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(9, 36, 56)
-        assertThat(millisToTimeString(millis)).isEqualTo("9:36:56")
+        assertThat(millisToTimeString(millis)).isEqualTo("9:36:57")
     }
 
     @Test
     fun millisToTimeString_Input_13h0m4s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(13, 0, 4)
-        assertThat(millisToTimeString(millis)).isEqualTo("13:00:04")
+        assertThat(millisToTimeString(millis)).isEqualTo("13:00:05")
     }
 
     @Test
     fun millisToTimeString_Input_16h0m56s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(16, 0, 56)
-        assertThat(millisToTimeString(millis)).isEqualTo("16:00:56")
+        assertThat(millisToTimeString(millis)).isEqualTo("16:00:57")
     }
 
     @Test
     fun millisToTimeString_Input_23h4m8s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(23, 4, 8)
-        assertThat(millisToTimeString(millis)).isEqualTo("23:04:08")
+        assertThat(millisToTimeString(millis)).isEqualTo("23:04:09")
     }
 
     @Test
     fun millisToTimeString_Input_32h7m26s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(32, 7, 26)
-        assertThat(millisToTimeString(millis)).isEqualTo("32:07:26")
+        assertThat(millisToTimeString(millis)).isEqualTo("32:07:27")
     }
 
     @Test
     fun millisToTimeString_Input_41h13m4s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(41, 13, 4)
-        assertThat(millisToTimeString(millis)).isEqualTo("41:13:04")
+        assertThat(millisToTimeString(millis)).isEqualTo("41:13:05")
     }
 
     @Test
     fun millisToTimeString_Input_67h18m47s_PlusRandomOffset() {
         setMillisFromHourMinutesSecondsWithRandomOffset(67, 18, 47)
-        assertThat(millisToTimeString(millis)).isEqualTo("67:18:47")
+        assertThat(millisToTimeString(millis)).isEqualTo("67:18:48")
     }
 }
