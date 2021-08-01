@@ -4,14 +4,13 @@ import android.os.CountDownTimer
 import com.zachvg.chessclock.domain.ChessTimer
 import com.zachvg.chessclock.domain.TimerHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 private const val COUNTDOWN_INTERVAL = 1_000L
 
-class ChessTimerImpl(coroutineScope: CoroutineScope) : ChessTimer {
+class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTimer {
 
     override var eventHandler: TimerHandler? = null
 
@@ -28,31 +27,80 @@ class ChessTimerImpl(coroutineScope: CoroutineScope) : ChessTimer {
 
     override fun start() {
         when (state) {
-            State.NOT_STARTED, State.
+            State.RUNNING -> { /* Do nothing */ }
+            else -> { startTimer() }
         }
     }
 
+    private fun startTimer() {
+        countdownTimer = newCountdownTimer(timeLeft, COUNTDOWN_INTERVAL).apply {
+            start()
+        }
+
+        state = State.RUNNING
+    }
+
     override fun pause() {
-        TODO("Not yet implemented")
+        when (state) {
+            State.PAUSED -> { /* Do nothing */ }
+            else -> { pauseTimer() }
+        }
+    }
+
+    private fun pauseTimer() {
+        countdownTimer?.cancel()
+        countdownTimer = null
+
+        state = State.PAUSED
     }
 
     override fun cancel() {
-        TODO("Not yet implemented")
+        when (state) {
+            State.RUNNING, State.PAUSED -> { cancelTimer() }
+            else -> { /* Do nothing */ }
+        }
+    }
+
+    private fun cancelTimer() {
+        countdownTimer?.cancel()
+        countdownTimer = null
+
+        state = State.CANCELED
     }
 
     override fun reset() {
-        TODO("Not yet implemented")
+        when (state) {
+            State.NOT_STARTED -> { /* Do nothing */ }
+            else -> { resetTimer() }
+        }
+    }
+
+    private fun resetTimer() {
+        countdownTimer?.cancel()
+        countdownTimer = null
+
+        state = State.NOT_STARTED
     }
 
     private fun newCountdownTimer(millisInFuture: Long, countdownInterval: Long) =
         object : CountDownTimer(millisInFuture, countdownInterval) {
 
             override fun onTick(millisUntilFinished: Long) {
-                TODO("Not yet implemented")
+                timerCoroutineScope.launch {
+                    _time.emit(millisUntilFinished)
+                }
+
+                timeLeft = millisUntilFinished
             }
 
             override fun onFinish() {
-                TODO("Not yet implemented")
+                timerCoroutineScope.launch {
+                    _time.emit(0)
+                }
+
+                countdownTimer = null
+
+                state = State.FINISHED
             }
 
         }
@@ -61,6 +109,7 @@ class ChessTimerImpl(coroutineScope: CoroutineScope) : ChessTimer {
         NOT_STARTED,
         RUNNING,
         PAUSED,
+        CANCELED,
         FINISHED
     }
 }
