@@ -1,38 +1,38 @@
 package com.zachvg.chessclock.ui.clock
 
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.zachvg.chessclock.SingleLiveEvent
-import com.zachvg.chessclock.clock.ChessClock
+import com.zachvg.chessclock.clock.ChessClockImpl
+import com.zachvg.chessclock.clock.ChessTimerImpl
+import com.zachvg.chessclock.domain.ChessClock
 import com.zachvg.chessclock.millisToTimeString
 
 class ClockViewModel : ViewModel() {
 
-    private val clock = ChessClock(10_000L, 11_000L)
+    private val clock = ChessClockImpl(ChessTimerImpl(viewModelScope), ChessTimerImpl(viewModelScope))
 
     val player1Time: LiveData<String> =
-        Transformations.map(clock.player1TimeRemaining) { millis -> millisToTimeString(millis) }
+        Transformations.map(clock.player1Time.asLiveData()) { millis -> millisToTimeString(millis) }
 
     val player2Time: LiveData<String> =
-        Transformations.map(clock.player2TimeRemaining) { millis -> millisToTimeString(millis) }
+        Transformations.map(clock.player2Time.asLiveData()) { millis -> millisToTimeString(millis) }
 
     val showPauseButton: LiveData<Int> =
-        Transformations.map(clock.gameState) { gameState -> if (gameState == ChessClock.GameState.IN_PROGRESS) View.VISIBLE else View.INVISIBLE }
+        Transformations.map(clock.gameState.asLiveData()) { gameState -> if (gameState == ChessClock.GameState.IN_PROGRESS) View.VISIBLE else View.INVISIBLE }
 
-    val player1State = clock.player1State
+    val player1State = clock.player1State.asLiveData()
 
-    val player2State = clock.player2State
+    val player2State = clock.player2State.asLiveData()
 
     val showResetDialog = SingleLiveEvent<Boolean>()
 
     fun onPlayer1ButtonClick() {
-        clock.onPlayerButtonClick(ChessClock.Player.PLAYER_1)
+        clock.onPlayerPress(ChessClock.Player.PLAYER_1)
     }
 
     fun onPlayer2ButtonClick() {
-        clock.onPlayerButtonClick(ChessClock.Player.PLAYER_2)
+        clock.onPlayerPress(ChessClock.Player.PLAYER_2)
     }
 
     fun onSettingsButtonClick() {

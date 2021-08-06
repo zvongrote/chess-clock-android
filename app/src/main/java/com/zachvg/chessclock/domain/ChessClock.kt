@@ -8,6 +8,10 @@ interface ChessClock {
 
     val player2Time: StateFlow<Long>
 
+    val player1State: StateFlow<PlayerState>
+
+    val player2State: StateFlow<PlayerState>
+
     val activePlayer: StateFlow<Player>
 
     val gameState: StateFlow<GameState>
@@ -22,6 +26,12 @@ interface ChessClock {
         NONE,
         PLAYER_1,
         PLAYER_2
+    }
+
+    enum class PlayerState {
+        INACTIVE,
+        ACTIVE,
+        OUT_OF_TIME
     }
 
     enum class GameState {

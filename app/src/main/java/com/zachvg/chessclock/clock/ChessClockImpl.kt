@@ -15,6 +15,12 @@ class ChessClockImpl(
 
     override val player2Time: StateFlow<Long> = player2Timer.time
 
+    private val _player1State = MutableStateFlow(ChessClock.PlayerState.INACTIVE)
+    override val player1State: StateFlow<ChessClock.PlayerState> = _player1State
+
+    private val _player2State = MutableStateFlow(ChessClock.PlayerState.INACTIVE)
+    override val player2State: StateFlow<ChessClock.PlayerState> = _player2State
+
     private val _activePlayer = MutableStateFlow(ChessClock.Player.NONE)
     override val activePlayer = _activePlayer.asStateFlow()
 
@@ -35,6 +41,9 @@ class ChessClockImpl(
         _gameState.value = ChessClock.GameState.PAUSED
 
         _activePlayer.value = ChessClock.Player.NONE
+
+        _player1State.value = ChessClock.PlayerState.INACTIVE
+        _player2State.value = ChessClock.PlayerState.INACTIVE
     }
 
     private fun pauseActiveTimer() = when (activePlayer.value) {
@@ -50,6 +59,9 @@ class ChessClockImpl(
         _gameState.value = ChessClock.GameState.NOT_STARTED
 
         _activePlayer.value = ChessClock.Player.NONE
+
+        _player1State.value = ChessClock.PlayerState.INACTIVE
+        _player2State.value = ChessClock.PlayerState.INACTIVE
     }
 
     override fun onPlayerPress(player: ChessClock.Player) {
@@ -66,13 +78,17 @@ class ChessClockImpl(
             ChessClock.Player.PLAYER_1 -> {
                 player2Timer.start()
                 _activePlayer.value = ChessClock.Player.PLAYER_2
+                _player2State.value = ChessClock.PlayerState.ACTIVE
             }
             ChessClock.Player.PLAYER_2 -> {
                 player1Timer.start()
                 _activePlayer.value = ChessClock.Player.PLAYER_1
+                _player1State.value = ChessClock.PlayerState.ACTIVE
             }
             else -> Unit
         }
+
+        _gameState.value = ChessClock.GameState.IN_PROGRESS
     }
 
     private fun toggleActivePlayer() {
@@ -82,12 +98,16 @@ class ChessClockImpl(
                 player2Timer.start()
 
                 _activePlayer.value = ChessClock.Player.PLAYER_2
+                _player2State.value = ChessClock.PlayerState.ACTIVE
+                _player1State.value = ChessClock.PlayerState.INACTIVE
             }
             ChessClock.Player.PLAYER_2 -> {
                 player2Timer.pause()
                 player1Timer.start()
 
                 _activePlayer.value = ChessClock.Player.PLAYER_1
+                _player1State.value = ChessClock.PlayerState.ACTIVE
+                _player2State.value = ChessClock.PlayerState.INACTIVE
             }
             else -> Unit
         }

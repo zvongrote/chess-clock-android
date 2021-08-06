@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.zachvg.chessclock.R
-import com.zachvg.chessclock.clock.ChessClock
 import com.zachvg.chessclock.databinding.FragmentClockBinding
+import com.zachvg.chessclock.domain.ChessClock
 
 
 class ClockFragment : Fragment() {

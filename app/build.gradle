@@ -59,4 +59,7 @@ dependencies {
 
     // Truth
     testImplementation "com.google.truth:truth:1.1.2"
+
+    // KTX
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 }

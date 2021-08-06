@@ -79,6 +79,9 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
         countdownTimer?.cancel()
         countdownTimer = null
 
+        _time.value = totalTimeMillis
+        timeLeft = totalTimeMillis
+
         state = State.NOT_STARTED
     }
 
