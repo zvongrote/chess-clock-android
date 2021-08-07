@@ -2,13 +2,17 @@ package com.zachvg.chessclock.clock
 
 import com.zachvg.chessclock.domain.ChessClock
 import com.zachvg.chessclock.domain.ChessTimer
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ChessClockImpl(
     private val player1Timer: ChessTimer,
-    private val player2Timer: ChessTimer
+    private val player2Timer: ChessTimer,
+    private val coroutineScope: CoroutineScope
 ) : ChessClock {
 
     override val player1Time: StateFlow<Long> = player1Timer.time
@@ -26,6 +30,27 @@ class ChessClockImpl(
 
     private val _gameState = MutableStateFlow(ChessClock.GameState.NOT_STARTED)
     override val gameState = _gameState.asStateFlow()
+
+    init {
+        coroutineScope.launch {
+            player1Timer.finished.collect { finished ->
+                if (finished) {
+                   setPlayerOutOfTimeAndGameStateFinished(_player1State)
+                }
+            }
+
+            player2Timer.finished.collect { finished ->
+                if (finished) {
+                    setPlayerOutOfTimeAndGameStateFinished(_player2State)
+                }
+            }
+        }
+    }
+
+    private fun setPlayerOutOfTimeAndGameStateFinished(playerState: MutableStateFlow<ChessClock.PlayerState>) {
+        playerState.value = ChessClock.PlayerState.OUT_OF_TIME
+        _gameState.value = ChessClock.GameState.FINISHED
+    }
 
     override fun pause() {
         when (gameState.value) {

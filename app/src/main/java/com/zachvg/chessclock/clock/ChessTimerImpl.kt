@@ -35,7 +35,7 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
     }
 
     private fun startTimer() {
-        countdownTimer = newCountdownTimer(timeLeft, COUNTDOWN_INTERVAL).also {
+        countdownTimer = newCountdownTimer(timeLeft, COUNTDOWN_INTERVAL).apply {
             start()
         }
 

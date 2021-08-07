@@ -10,7 +10,7 @@ import com.zachvg.chessclock.millisToTimeString
 
 class ClockViewModel : ViewModel() {
 
-    private val clock = ChessClockImpl(ChessTimerImpl(viewModelScope), ChessTimerImpl(viewModelScope))
+    private val clock = ChessClockImpl(ChessTimerImpl(viewModelScope), ChessTimerImpl(viewModelScope), viewModelScope)
 
     val player1Time: LiveData<String> =
         Transformations.map(clock.player1Time.asLiveData()) { millis -> millisToTimeString(millis) }
