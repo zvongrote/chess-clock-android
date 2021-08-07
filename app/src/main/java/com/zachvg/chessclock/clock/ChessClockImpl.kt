@@ -38,7 +38,9 @@ class ChessClockImpl(
                    setPlayerOutOfTimeAndGameStateFinished(_player1State)
                 }
             }
+        }
 
+        coroutineScope.launch {
             player2Timer.finished.collect { finished ->
                 if (finished) {
                     setPlayerOutOfTimeAndGameStateFinished(_player2State)
