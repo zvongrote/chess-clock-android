@@ -6,13 +6,12 @@ import com.zachvg.chessclock.domain.TimerHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 private const val COUNTDOWN_INTERVAL = 1_000L
 
 class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTimer {
-
-    override var eventHandler: TimerHandler? = null
 
     override var totalTimeMillis = 10_000L
 
@@ -22,18 +21,21 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
     private var state = State.NOT_STARTED
 
-    private val _time = MutableStateFlow<Long>(totalTimeMillis)
-    override val time: StateFlow<Long> = _time
+    private val _time = MutableStateFlow(totalTimeMillis)
+    override val time = _time.asStateFlow()
+
+    private val _finished = MutableStateFlow(false)
+    override val finished = _finished.asStateFlow()
 
     override fun start() {
         when (state) {
-            State.RUNNING -> { /* Do nothing */ }
-            else -> { startTimer() }
+            State.NOT_STARTED, State.PAUSED -> startTimer()
+            else -> Unit
         }
     }
 
     private fun startTimer() {
-        countdownTimer = newCountdownTimer(timeLeft, COUNTDOWN_INTERVAL).apply {
+        countdownTimer = newCountdownTimer(timeLeft, COUNTDOWN_INTERVAL).also {
             start()
         }
 
@@ -42,8 +44,8 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
     override fun pause() {
         when (state) {
-            State.PAUSED -> { /* Do nothing */ }
-            else -> { pauseTimer() }
+            State.RUNNING -> pauseTimer()
+            else -> Unit
         }
     }
 
@@ -56,8 +58,8 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
     override fun cancel() {
         when (state) {
-            State.RUNNING, State.PAUSED -> { cancelTimer() }
-            else -> { /* Do nothing */ }
+            State.RUNNING, State.PAUSED -> cancelTimer()
+            else -> Unit
         }
     }
 
@@ -70,8 +72,8 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
     override fun reset() {
         when (state) {
-            State.NOT_STARTED -> { /* Do nothing */ }
-            else -> { resetTimer() }
+            State.NOT_STARTED -> Unit
+            else -> resetTimer()
         }
     }
 
@@ -83,6 +85,8 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
         timeLeft = totalTimeMillis
 
         state = State.NOT_STARTED
+
+        _finished.value = false
     }
 
     private fun newCountdownTimer(millisInFuture: Long, countdownInterval: Long) =
@@ -90,7 +94,7 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
             override fun onTick(millisUntilFinished: Long) {
                 timerCoroutineScope.launch {
-                    _time.emit(millisUntilFinished)
+                    _time.value = millisUntilFinished
                 }
 
                 timeLeft = millisUntilFinished
@@ -98,12 +102,14 @@ class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTim
 
             override fun onFinish() {
                 timerCoroutineScope.launch {
-                    _time.emit(0)
+                    _time.value = 0
                 }
 
                 countdownTimer = null
 
                 state = State.FINISHED
+
+                _finished.value = true
             }
 
         }

@@ -4,11 +4,11 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface ChessTimer {
 
-    var eventHandler: TimerHandler?
-
     var totalTimeMillis: Long
 
     val time: StateFlow<Long>
+
+    val finished: StateFlow<Boolean>
 
     fun start()
 
