@@ -11,8 +11,9 @@ import androidx.fragment.app.viewModels
 import com.zachvg.chessclock.R
 import com.zachvg.chessclock.databinding.FragmentClockBinding
 import com.zachvg.chessclock.domain.ChessClock
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ClockFragment : Fragment() {
 
     private val viewModel: ClockViewModel by viewModels()

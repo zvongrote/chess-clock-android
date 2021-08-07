@@ -1,17 +1,17 @@
 package com.zachvg.chessclock.clock
 
 import android.os.CountDownTimer
+import com.zachvg.chessclock.di.ViewModelScope
 import com.zachvg.chessclock.domain.ChessTimer
-import com.zachvg.chessclock.domain.TimerHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val COUNTDOWN_INTERVAL = 1_000L
 
-class ChessTimerImpl(private val timerCoroutineScope: CoroutineScope) : ChessTimer {
+class ChessTimerImpl @Inject constructor(@ViewModelScope private val timerCoroutineScope: CoroutineScope) : ChessTimer {
 
     override var totalTimeMillis = 10_000L
 

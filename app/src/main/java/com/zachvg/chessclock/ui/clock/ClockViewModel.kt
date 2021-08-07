@@ -7,10 +7,11 @@ import com.zachvg.chessclock.clock.ChessClockImpl
 import com.zachvg.chessclock.clock.ChessTimerImpl
 import com.zachvg.chessclock.domain.ChessClock
 import com.zachvg.chessclock.millisToTimeString
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ClockViewModel : ViewModel() {
-
-    private val clock = ChessClockImpl(ChessTimerImpl(viewModelScope), ChessTimerImpl(viewModelScope), viewModelScope)
+@HiltViewModel
+class ClockViewModel @Inject constructor(private val clock: ChessClock) : ViewModel() {
 
     val player1Time: LiveData<String> =
         Transformations.map(clock.player1Time.asLiveData()) { millis -> millisToTimeString(millis) }

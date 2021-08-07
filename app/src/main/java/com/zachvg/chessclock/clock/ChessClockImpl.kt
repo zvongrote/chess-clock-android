@@ -1,5 +1,6 @@
 package com.zachvg.chessclock.clock
 
+import com.zachvg.chessclock.di.ViewModelScope
 import com.zachvg.chessclock.domain.ChessClock
 import com.zachvg.chessclock.domain.ChessTimer
 import kotlinx.coroutines.CoroutineScope
@@ -8,11 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChessClockImpl(
+class ChessClockImpl @Inject constructor(
     private val player1Timer: ChessTimer,
     private val player2Timer: ChessTimer,
-    private val coroutineScope: CoroutineScope
+    @ViewModelScope private val coroutineScope: CoroutineScope
 ) : ChessClock {
 
     override val player1Time: StateFlow<Long> = player1Timer.time
