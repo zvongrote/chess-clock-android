@@ -2,12 +2,12 @@ package com.zachvg.chessclock.ui.clock
 
 import android.view.View
 import androidx.lifecycle.*
-import com.zachvg.chessclock.SingleLiveEvent
-import com.zachvg.chessclock.clock.ChessClockImpl
-import com.zachvg.chessclock.clock.ChessTimerImpl
 import com.zachvg.chessclock.domain.ChessClock
 import com.zachvg.chessclock.millisToTimeString
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +26,13 @@ class ClockViewModel @Inject constructor(private val clock: ChessClock) : ViewMo
 
     val player2State = clock.player2State.asLiveData()
 
-    val showResetDialog = SingleLiveEvent<Boolean>()
+    sealed class Event {
+        object ShowResetDialog : Event()
+    }
+
+    private val eventChannel = Channel<Event>(Channel.BUFFERED)
+    val eventFlow = eventChannel.receiveAsFlow()
+
 
     fun onPlayer1ButtonClick() {
         clock.onPlayerPress(ChessClock.Player.PLAYER_1)
@@ -46,7 +52,7 @@ class ClockViewModel @Inject constructor(private val clock: ChessClock) : ViewMo
 
     fun onResetButtonClick() {
         clock.pause()
-        showResetDialog.value = true
+        viewModelScope.launch { eventChannel.send(Event.ShowResetDialog) }
     }
 
     fun resetClock() {

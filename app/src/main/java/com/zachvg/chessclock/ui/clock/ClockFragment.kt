@@ -2,16 +2,21 @@ package com.zachvg.chessclock.ui.clock
 
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.zachvg.chessclock.R
 import com.zachvg.chessclock.databinding.FragmentClockBinding
 import com.zachvg.chessclock.domain.ChessClock
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ClockFragment : Fragment() {
@@ -58,13 +63,21 @@ class ClockFragment : Fragment() {
             }
         }
 
-        viewModel.showResetDialog.observe(viewLifecycleOwner) { showResetDialog ->
-            if (showResetDialog) {
-                val positiveDialogListener =
-                    DialogInterface.OnClickListener { _, _ -> viewModel.resetClock() }
-
-                ResetDialog(positiveDialogListener).show(requireActivity().supportFragmentManager, "reset")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.eventFlow.collect {
+                    when (it) {
+                        ClockViewModel.Event.ShowResetDialog -> showResetDialog()
+                    }
+                }
             }
         }
+    }
+
+    private fun showResetDialog() {
+        val positiveDialogListener =
+            DialogInterface.OnClickListener { _, _ -> viewModel.resetClock() }
+
+        ResetDialog(positiveDialogListener).show(requireActivity().supportFragmentManager, "reset")
     }
 }
